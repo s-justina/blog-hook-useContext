@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import UserSelector from "./UserSelector";
 import CommentForm from "./CommentForm";
 import UserGreeting from "./UserGreeting";
+import MoodSelector from "./MoodSelector";
 
 import "./styles.css";
 import { AuthenticationContext } from "./AuthenticationContext";
+import { MoodContext } from "./MoodContext";
 
 function Header() {
   return (
@@ -13,27 +15,36 @@ function Header() {
       <h1>Moody blog</h1>
       <UserGreeting />
       <UserSelector />
+      <MoodSelector />
     </header>
   );
 }
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentMood, setCurrentMood] = useState("normal");
   return (
     <div className="App">
-      <AuthenticationContext.Provider
+      <MoodContext.Provider
         value={{
-          onLogin: setCurrentUser,
-          onLogout: () => setCurrentUser(null),
-          currentUser
+          currentMood,
+          onCurrentMoodChange: setCurrentMood
         }}
       >
-        <Header />
-        <Article title="Doctors hate him" />
-        <Article title="You won't believe what happened next" />
-        <Article title="10 best things..." />
-        <Article title="Blatant clickbait" />
-      </AuthenticationContext.Provider>
+        <AuthenticationContext.Provider
+          value={{
+            onLogin: setCurrentUser,
+            onLogout: () => setCurrentUser(null),
+            currentUser
+          }}
+        >
+          <Header />
+          <Article title="Doctors hate him" />
+          <Article title="You won't believe what happened next" />
+          <Article title="10 best things..." />
+          <Article title="Blatant clickbait" />
+        </AuthenticationContext.Provider>
+      </MoodContext.Provider>
     </div>
   );
 }
