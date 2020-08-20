@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import UserSelector from "./UserSelector";
+import CommentForm from "./CommentForm";
+import UserGreeting from "./UserGreeting";
 
 import "./styles.css";
 
 function Header() {
+  const currentUser = null;
+  const setCurrentUser = () => {};
   return (
     <header className="header">
       <h1>Moody blog</h1>
+      <UserGreeting currentUser={currentUser} />
+      <UserSelector
+        onLogin={setCurrentUser}
+        onLogout={() => setCurrentUser(null)}
+        currentUser={currentUser}
+      />
     </header>
   );
 }
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   return (
     <div className="App">
       <Header />
@@ -24,6 +36,7 @@ function App() {
 }
 
 function Article({ title }) {
+  const currentUser = null;
   return (
     <article>
       <h1>{title}</h1>
@@ -36,6 +49,7 @@ function Article({ title }) {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
+      <CommentForm currentUser={currentUser} />
     </article>
   );
 }

@@ -7,7 +7,7 @@ const MESSAGES = {
 };
 
 export default function CommentForm({ currentUser, currentMood = "normal" }) {
-  const canComment = !!currentUser;
+  const canComment = currentUser;
   const title = canComment
     ? `Hey ${currentUser.name}, why don't you leave a comment?`
     : "Hey stranger, please log in and leave a comment.";
