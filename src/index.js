@@ -5,12 +5,7 @@ import CommentForm from "./CommentForm";
 import UserGreeting from "./UserGreeting";
 
 import "./styles.css";
-
-const AuthenticationContext = React.createContext({
-  currentUser: null,
-  onLogin: () => {},
-  onLogout: () => {}
-});
+import { AuthenticationContext } from "./AuthenticationContext";
 
 function Header() {
   const currentUser = null;
