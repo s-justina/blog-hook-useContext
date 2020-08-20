@@ -8,12 +8,10 @@ import "./styles.css";
 import { AuthenticationContext } from "./AuthenticationContext";
 
 function Header() {
-  const currentUser = null;
-
   return (
     <header className="header">
       <h1>Moody blog</h1>
-      <UserGreeting currentUser={currentUser} />
+      <UserGreeting />
       <UserSelector />
     </header>
   );
@@ -41,7 +39,6 @@ function App() {
 }
 
 function Article({ title }) {
-  const currentUser = null;
   return (
     <article>
       <h1>{title}</h1>
@@ -54,7 +51,7 @@ function Article({ title }) {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <CommentForm currentUser={currentUser} />
+      <CommentForm />
     </article>
   );
 }
