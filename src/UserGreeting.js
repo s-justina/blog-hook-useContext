@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AuthenticationContext } from "./AuthenticationContext";
 import { MoodContext } from "./MoodContext";
 
@@ -9,21 +9,15 @@ const MESSAGES = {
 };
 
 export default function UserGreeting() {
+  const { currentMood } = useContext(MoodContext);
+  const { currentUser } = useContext(AuthenticationContext);
+
+  const message = MESSAGES[currentMood];
+
   return (
-    <MoodContext.Consumer>
-      {({ currentMood }) => {
-        const message = MESSAGES[currentMood];
-        return (
-          <AuthenticationContext.Consumer>
-            {({ currentUser }) => (
-              <>
-                <h2>Hi {currentUser ? currentUser.name : "stranger"}</h2>
-                <h3>{message}</h3>
-              </>
-            )}
-          </AuthenticationContext.Consumer>
-        );
-      }}
-    </MoodContext.Consumer>
+    <>
+      <h2>Hi {currentUser ? currentUser.name : "stranger"}</h2>
+      <h3>{message}</h3>
+    </>
   );
 }
