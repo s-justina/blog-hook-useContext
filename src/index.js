@@ -6,18 +6,20 @@ import UserGreeting from "./UserGreeting";
 
 import "./styles.css";
 
+const AuthenticationContext = React.createContext({
+  currentUser: null,
+  onLogin: () => {},
+  onLogout: () => {}
+});
+
 function Header() {
   const currentUser = null;
-  const setCurrentUser = () => {};
+
   return (
     <header className="header">
       <h1>Moody blog</h1>
       <UserGreeting currentUser={currentUser} />
-      <UserSelector
-        onLogin={setCurrentUser}
-        onLogout={() => setCurrentUser(null)}
-        currentUser={currentUser}
-      />
+      <UserSelector />
     </header>
   );
 }
@@ -26,11 +28,19 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
     <div className="App">
-      <Header />
-      <Article title="Doctors hate him" />
-      <Article title="You won't believe what happened next" />
-      <Article title="10 best things..." />
-      <Article title="Blatant clickbait" />
+      <AuthenticationContext.Provider
+        value={{
+          onLogin: setCurrentUser,
+          onLogout: () => setCurrentUser(null),
+          currentUser
+        }}
+      >
+        <Header />
+        <Article title="Doctors hate him" />
+        <Article title="You won't believe what happened next" />
+        <Article title="10 best things..." />
+        <Article title="Blatant clickbait" />
+      </AuthenticationContext.Provider>
     </div>
   );
 }

@@ -4,8 +4,10 @@ export const ALL_USERS = [{ name: "Bob" }, { name: "Alice" }];
 
 export default function UserSelector({ onLogin, onLogout, currentUser }) {
   return (
+    // <AuthenticationContext.Consumer>
+    // {() => (
     <div>
-      {ALL_USERS.map(user => (
+      {ALL_USERS.map((user) => (
         <button
           key={user.name}
           disabled={currentUser === user}
@@ -18,5 +20,7 @@ export default function UserSelector({ onLogin, onLogout, currentUser }) {
         Log out
       </button>
     </div>
+    // )}
+    // </AuthenticationContext.Consumer>
   );
 }
